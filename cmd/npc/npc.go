@@ -1,23 +1,24 @@
 package main
 
 import (
-	"ehang.io/nps/client"
-	"ehang.io/nps/lib/common"
-	"ehang.io/nps/lib/config"
-	"ehang.io/nps/lib/file"
-	"ehang.io/nps/lib/install"
-	"ehang.io/nps/lib/version"
 	"flag"
 	"fmt"
-	"github.com/astaxie/beego/logs"
-	"github.com/ccding/go-stun/stun"
-	"github.com/kardianos/service"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
 	"sync"
 	"time"
+
+	"ehang.io/nps/client"
+	"ehang.io/nps/lib/common"
+	"ehang.io/nps/lib/config"
+	"ehang.io/nps/lib/file"
+	"ehang.io/nps/lib/install"
+	"ehang.io/nps/lib/version"
+	"github.com/astaxie/beego/logs"
+	"github.com/ccding/go-stun/stun"
+	"github.com/kardianos/service"
 )
 
 var (
@@ -60,15 +61,15 @@ func main() {
 	if *debug {
 		logs.SetLogger(logs.AdapterConsole, `{"level":`+*logLevel+`,"color":true}`)
 	} else {
-		logs.SetLogger(logs.AdapterFile, `{"level":`+*logLevel+`,"filename":"`+*logPath+`","daily":false,"maxlines":100000,"color":true}`)
+		logs.SetLogger(logs.AdapterFile, `{"level":`+*logLevel+`,"filename":"`+*logPath+`","daily":true,"maxlines":100000,"maxdays": 7,"color":true}`)
 	}
 
 	// init service
 	options := make(service.KeyValue)
 	svcConfig := &service.Config{
 		Name:        "Npc",
-		DisplayName: "nps内网穿透客户端",
-		Description: "一款轻量级、功能强大的内网穿透代理服务器。支持tcp、udp流量转发，支持内网http代理、内网socks5代理，同时支持snappy压缩、站点保护、加密传输、多路复用、header修改等。支持web图形化管理，集成多用户模式。",
+		DisplayName: "_nps客户端",
+		Description: "0.26.19_20240927",
 		Option:      options,
 	}
 	if !common.IsWindows() {
